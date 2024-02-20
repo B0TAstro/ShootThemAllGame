@@ -7,7 +7,8 @@ public class PlayerMouvement : MonoBehaviour
     // Player mouvement
     public float speed = 5.0f;
     Rigidbody2D rb;
-    Vector2 moveDirection;
+    [HideInInspector]
+    public Vector2 moveDirection;
 
     // Start is called before the first frame update
     void Start()
