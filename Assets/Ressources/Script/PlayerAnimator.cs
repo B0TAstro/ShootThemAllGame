@@ -7,14 +7,16 @@ public class PlayerAnimator : MonoBehaviour
     // References to the animator and the player mouvement script
     Animator am;
     PlayerMouvement pm;
-    SpriteRenderer sr;
+    SpriteRenderer[] childSpriteRenderers;
 
     // Start is called before the first frame update
     void Start()
     {
         am = GetComponent<Animator>();
+
         pm = GetComponent<PlayerMouvement>();
-        sr = GetComponent<SpriteRenderer>();
+
+        childSpriteRenderers = GetComponentsInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -33,13 +35,12 @@ public class PlayerAnimator : MonoBehaviour
 
     void DirectionCheck()
     {
-        if (pm.moveDirection.x < 0)
+        bool shouldFlip = pm.moveDirection.x > 0;
+
+        // Parcourt tous les SpriteRenderer enfants et les retourne si nécessaire
+        foreach (SpriteRenderer sr in childSpriteRenderers)
         {
-            sr.flipX = true;
-        }
-        else
-        {
-            sr.flipX = false;
+            sr.flipX = shouldFlip;
         }
     }
 }
