@@ -8,6 +8,10 @@ public class PlayerMouvement : MonoBehaviour
     public float speed = 5.0f;
     Rigidbody2D rb;
     [HideInInspector]
+    public float lastHorizontalVector;
+    [HideInInspector]
+    public float lastVerticalVector;
+    [HideInInspector]
     public Vector2 moveDirection;
 
     // Start is called before the first frame update
@@ -22,6 +26,16 @@ public class PlayerMouvement : MonoBehaviour
         float moveY = Input.GetAxis("Vertical");
 
         moveDirection = new Vector2(moveX, moveY).normalized;
+
+        if (moveDirection.x != 0)
+        {
+            lastHorizontalVector = moveDirection.x;
+        }
+
+        if (moveDirection.y != 0)
+        {
+            lastVerticalVector = moveDirection.y;
+        }
     }
 
     void Move()
